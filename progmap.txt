@@ -1,0 +1,10 @@
+// ++DEBUG - Start of a DEBUG block 
+// --DEBUG - End of a DEBUG block
+
+Code sections:
+
+/lib/	Supporting libraries
+
+/src/	Source code of the game
+
+/res/	Resource and Data files
