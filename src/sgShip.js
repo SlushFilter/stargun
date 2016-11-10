@@ -12,7 +12,7 @@
  * */
 Crafty.c("StaticMine", {
 	init : function() {
-		this.requires("Ship");
+		this.requires("EnemyShip");
 		this.w = 32;
 		this.h = 32;
 	}

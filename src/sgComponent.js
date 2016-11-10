@@ -27,25 +27,38 @@
  * */
 Crafty.c("Ship", {
 	init : function() {
-		this.requires("2D, Collision, Motion");
-		this.bind("ScrollSpeed", this._changeSpeed);
-		
+		this.requires("2D, Canvas, Collision, Motion");
+		// ++DEBUG
+		// this.addComponent("DebugGfx");
+		// --DEBUG
+	}
+});
+
+Crafty.c("EnemyShip", {
+	init : function() {
+		this.requires("Ship, gfxSpaceMine");
 		// Initialize speed.
 		var v = this.velocity();
 		v.x = sgGlobal.speed.x;
 		v.y = sgGlobal.speed.y;
-		
-		// ++DEBUG
-		this.addComponent("DebugGfx");
-		// --DEBUG
+		// Bind scrolling event.
+		this.bind("ScrollSpeed", this._changeSpeed);
+		// Bind bounds checking.
+		this.bind("Moved", this._checkBounds);
 	},
 	_changeSpeed : function(speed) {
 		var v = this.velocity();
 		v.x = v.x + (speed.cur.x - speed.old.x);
 		v.y = v.y + (speed.cur.y - speed.old.y);
+	},
+	_checkBounds : function() {
+		if(this._x <= -this._w) { 
+			this.destroy(); 
+			console.log("Kaboom");
+		}
 	}
- });
- 
+});
+
  /* *
   * Star
   * Star component for the background scroller.
